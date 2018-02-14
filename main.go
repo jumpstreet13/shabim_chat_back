@@ -1,5 +1,15 @@
 package main
 
+import (
+	"io"
+	"net/http"
+)
+
+func hello(w http.ResponseWriter, r *http.Request) {
+	io.WriteString(w, "Hello World")
+}
+
 func main() {
-	print("Hello world")
+	http.HandleFunc("/", hello)
+	http.ListenAndServe(":8000", nil)
 }
